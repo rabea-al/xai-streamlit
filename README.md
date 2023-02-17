@@ -1,10 +1,10 @@
-# Xircuits Component Library Template
+# Xircuits Streamlit Component Library
 
-This section should have a short description on what is does.
+Build your own [Streamlit](https://streamlit.io/) using Xircuits!
 
 ## Prerequisites
 
-A project may have prerequisites such as models that needs to be downloaded or non-python related setup. You may list them down here.
+You will require Xircuits 1.7+ or a build that includes the streamlit run this [PR](https://github.com/XpressAI/xircuits/pull/206).
 
 ## Installation
 
@@ -13,3 +13,10 @@ pip install -r requirements.txt
 ```
 
 To use this component library, simply copy the directory / clone or submodule the repository to your working Xircuits project directory.
+
+## Preview
+<details>
+  
+https://user-images.githubusercontent.com/68586800/219625051-97b75ee6-fe54-4c42-85e8-ebc5abeaf116.mp4
+  
+</details>

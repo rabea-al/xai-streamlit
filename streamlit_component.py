@@ -1,4 +1,7 @@
-from xai_components.base import InArg, OutArg, InCompArg, Component, xai_component
+from xai_components.base import InArg, OutArg, InCompArg, Component, BaseComponent, xai_component
+import streamlit as st
+import numpy as np
+import pandas as pd
 
 @xai_component(color="red")
 class Streamlit_Component(Component):
@@ -15,10 +18,6 @@ class Streamlit_Component(Component):
         self.data_url = InArg.empty()
         
     def execute(self, ctx) -> None:
-
-        import streamlit as st
-        import pandas as pd
-        import numpy as np
 
         st.title('Uber pickups in NYC')
 
@@ -52,12 +51,6 @@ class Streamlit_Component(Component):
 
         st.subheader('Map of all pickups at %s:00' % hour_to_filter)
         st.map(filtered_data)
-        
-from xai_components.base import InArg, OutArg, InCompArg, Component, BaseComponent, xai_component
-import streamlit as st
-import numpy as np
-import pandas as pd
-
 @xai_component
 class DataFrameFromCsv(Component):
     file: InArg[str]
