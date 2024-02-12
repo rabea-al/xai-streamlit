@@ -1,0 +1,14 @@
+[project]
+name = "xai-streamlit"
+version = "0.1.0"
+description = "A Xircuits component library for streamlit!"
+authors = [{ name = "XpressAI", email = "eduardo@xpress.ai" }]
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/XpressAI/xai-mqtt"
+keywords = ["xircuits", "streamlit", "data-visualization", "interactive-widgets"]
+
+# Xircuits-specific configurations
+[tool.xircuits]
+default_example_path = "examples/streamlit_sample.xircuits"
+requirements_path = "requirements.txt"
