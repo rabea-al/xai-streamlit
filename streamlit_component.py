@@ -3,6 +3,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
+STREAMLIT_SERVER_HEADLESS=True
+
 @xai_component(color="red")
 class Streamlit_Component(Component):
     """The simplest streamlit component. 
@@ -11,12 +13,6 @@ class Streamlit_Component(Component):
     data_url: InArg[str]
 
 
-    def __init__(self):
-
-        self.done = False
-        self.date_column = InArg.empty()
-        self.data_url = InArg.empty()
-        
     def execute(self, ctx) -> None:
 
         st.title('Uber pickups in NYC')
@@ -56,11 +52,7 @@ class DataFrameFromCsv(Component):
     file: InArg[str]
     data_frame: OutArg[pd.DataFrame]
 
-    def __init__(self):
-        self.done = False
-        self.file = InArg.empty()
-        self.data_frame = OutArg.empty()
-
+    
     def execute(self, ctx) -> None:
         self.data_frame.value = pd.read_csv(self.file.value)
 
@@ -68,9 +60,6 @@ class DataFrameFromCsv(Component):
 class StreamlitMainLayout(Component):
     module: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.module = OutArg.empty()
 
     def execute(self, ctx) -> None:
         self.module.value = st
@@ -79,9 +68,6 @@ class StreamlitMainLayout(Component):
 class StreamlitSidebarLayout(Component):
     sidebar: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.sidebar = OutArg.empty()
 
     def execute(self, ctx) -> None:
         self.sidebar.value = st.sidebar
@@ -91,10 +77,6 @@ class StreamlitMakeColumns(Component):
     count: InArg[int]
     columns: OutArg[list]
 
-    def __init__(self):
-        self.done = False
-        self.count = InArg.empty()
-        self.columns = OutArg.empty()
 
     def execute(self, ctx) -> None:
         self.columns.value = st.columns(self.count.value)
@@ -106,12 +88,7 @@ class StreamlitWrite(Component):
     object: InArg[any]
     layout_out: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.object = InArg.empty()
-        self.layout_out = OutArg.empty()
-
+    
     def execute(self, ctx) -> None:
         if self.layout.value is None:
             st.write(self.object.value)
@@ -127,11 +104,6 @@ class StreamlitDataFrame(Component):
     data_frame: InArg[pd.DataFrame]
     layout_out: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.data_frame = InArg.empty()
-        self.layout_out = OutArg.empty()
 
     def execute(self, ctx) -> None:
         if self.layout.value is None:
@@ -148,11 +120,6 @@ class StreamlitTable(Component):
     data_frame: InArg[pd.DataFrame]
     layout_out: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.data_frame = InArg.empty()
-        self.layout_out = OutArg.empty()
 
     def execute(self, ctx) -> None:
         if self.layout.value is None:
@@ -170,12 +137,7 @@ class StreamlitLineChart(Component):
     data_frame: InArg[pd.DataFrame]
     layout_out: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.data_frame = InArg.empty()
-        self.layout_out = OutArg.empty()
-
+   
     def execute(self, ctx) -> None:
         if self.layout.value is None:
             st.line_chart(self.data_frame.value)
@@ -191,11 +153,6 @@ class StreamlitMap(Component):
     data_frame: InArg[pd.DataFrame]
     layout_out: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.data_frame = InArg.empty()
-        self.layout_out = OutArg.empty()
 
     def execute(self, ctx) -> None:
         if self.layout.value is None:
@@ -214,14 +171,7 @@ class StreamlitSlider(Component):
     code: InArg[str]
     layout_out: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.name = InArg.empty()
-        self.description = InArg.empty()
-        self.code = InArg.empty()
-        self.layout_out = OutArg.empty()
-
+    
     def execute(self, ctx) -> None:
         slider = st.slider(self.name.value)
 
@@ -240,12 +190,6 @@ class StreamlitTextInput(Component):
     name: InArg[str]
     layout_out: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.label = InArg.empty()
-        self.name = InArg.empty()
-        self.layout_out = OutArg.empty()
 
     def execute(self, ctx) -> None:
         if self.layout.value is None:
@@ -264,14 +208,7 @@ class StreamlitRadio(Component):
     variable: OutArg[any]
     layout_out: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.label = InArg.empty()
-        self.values = InArg.empty()
-        self.variable = OutArg.empty()
-        self.layout_out = OutArg.empty()
-
+    
     def execute(self, ctx) -> None:
         if self.layout.value is None:
             self.variable.value = st.radio(self.label.value, self.values.value)
@@ -287,11 +224,7 @@ class StreamlitReadVariable(Component):
     name: InArg[str]
     value: OutArg[any]
 
-    def __init__(self):
-        self.done = False
-        self.name = InArg.empty()
-        self.value = OutArg.empty()
-
+    
     def execute(self, ctx) -> None:
         self.value.value = getattr(st.session_state, self.name.value)
 
@@ -300,12 +233,7 @@ class StreamlitMarkdown(Component):
     layout: InArg[any]
     markdown: InArg[str]
     layout_out: OutArg[any]
-
-    def __init__(self):
-        self.done = False
-        self.layout = InArg.empty()
-        self.markdown = InArg.empty()
-        self.layout_out = OutArg.empty()
+ 
 
     def execute(self, ctx) -> None:
         if self.layout.value is None:
