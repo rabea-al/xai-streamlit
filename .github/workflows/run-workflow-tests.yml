@@ -49,9 +49,6 @@ jobs:
     - name: List Xircuits
       run: xircuits list
 
-    - name: Install Xircuits Library
-      run: xircuits install sklearn
-
     - name: Clone Repository
       run: |
         rm -rf ${{ env.COMPONENT_LIBRARY_PATH }}
