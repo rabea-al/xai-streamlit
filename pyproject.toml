@@ -8,6 +8,12 @@ readme = "README.md"
 repository = "https://github.com/XpressAI/xai-mqtt"
 keywords = ["xircuits", "streamlit", "data-visualization", "interactive-widgets"]
 
+dependencies = [
+    "streamlit==1.39.0",
+    "pandas",
+    "numpy"
+]
+
 # Xircuits-specific configurations
 [tool.xircuits]
 default_example_path = "examples/streamlit_sample.xircuits"
